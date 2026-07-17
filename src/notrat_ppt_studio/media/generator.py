@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Fallback CLI for nestmold-ppt-studio image generation or editing with GPT Image models.
+#!/usr/bin/env python3
+"""Fallback CLI for notrat-ppt-studio image generation or editing with GPT Image models.
 
 Used when Notrat's built-in image tool is unavailable, when the user explicitly
 opts into API mode, or when explicit transparent output requires the
@@ -50,8 +50,8 @@ GPT_IMAGE_2_MAX_RATIO = 3.0
 
 MAX_IMAGE_BYTES = 50 * 1024 * 1024
 MAX_BATCH_JOBS = 500
-DEFAULT_RUNTIME_HOME = "~/.nestmold-ppt-studio"
-ENV_FIELDS = ("OPENAI_API_KEY", "OPENAI_BASE_URL", "NESTMOLD_PPT_IMAGE_MODEL")
+DEFAULT_RUNTIME_HOME = "~/.notrat-ppt-studio"
+ENV_FIELDS = ("OPENAI_API_KEY", "OPENAI_BASE_URL", "NOTRAT_PPT_IMAGE_MODEL")
 
 
 def _die(message: str, code: int = 1) -> None:
@@ -64,7 +64,7 @@ def _warn(message: str) -> None:
 
 
 def _runtime_home() -> Path:
-    return Path(os.getenv("NESTMOLD_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
+    return Path(os.getenv("NOTRAT_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
 
 
 def _runtime_env_path() -> Path:
@@ -88,7 +88,7 @@ def _load_runtime_env() -> None:
 
 
 def _default_model() -> str:
-    return os.getenv("NESTMOLD_PPT_IMAGE_MODEL", DEFAULT_MODEL)
+    return os.getenv("NOTRAT_PPT_IMAGE_MODEL", DEFAULT_MODEL)
 
 
 def _api_base_url() -> Optional[str]:
@@ -142,8 +142,8 @@ def _dependency_hint(package: str, *, upgrade: bool = False) -> str:
     runtime_python = _runtime_python_path()
     requirements = _skill_root() / "requirements.txt"
     return (
-        "Install nestmold-ppt-studio dependencies in the shared runtime first, for example "
-        f"`python3 {_skill_root() / 'scripts' / 'nestmold-ppt.py'} runtime bootstrap`, "
+        "Install notrat-ppt-studio dependencies in the shared runtime first, for example "
+        f"`python3 {_skill_root() / 'scripts' / 'notrat-ppt.py'} runtime bootstrap`, "
         f"or install {package} directly with `{runtime_python} -m pip install "
         f"{package_arg}`. Requirements file: `{requirements}`."
     )
@@ -156,7 +156,7 @@ def _ensure_api_key(dry_run: bool) -> None:
     if dry_run:
         _warn(f"OPENAI_API_KEY is not set; dry-run only. API target: {_api_target_label()}.")
         return
-    runtime_script = _skill_root() / "scripts" / "nestmold-ppt.py"
+    runtime_script = _skill_root() / "scripts" / "notrat-ppt.py"
     config_doc = _skill_root() / "docs" / "image-model-configuration.md"
     base_url = _api_base_url()
     model = _default_model()
@@ -170,7 +170,7 @@ def _ensure_api_key(dry_run: bool) -> None:
         command = f'python3 {runtime_script} runtime config --api-key "your-api-key" --model {model}'
         target_hint = "Detected official OpenAI API mode because OPENAI_BASE_URL is not set."
     _die(
-        "OPENAI_API_KEY is not set for nestmold-ppt-studio CLI/API fallback.\n"
+        "OPENAI_API_KEY is not set for notrat-ppt-studio CLI/API fallback.\n"
         f"{target_hint}\n"
         "Use the built-in image tool if it is available. Otherwise configure the shared runtime once:\n"
         f"  {command}\n"

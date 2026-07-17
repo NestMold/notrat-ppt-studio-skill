@@ -1,13 +1,13 @@
 # Architecture
 
-Nestmold PPT Studio exposes one workflow across image, editable, hybrid, and animation-enabled presentations.
+Notrat PPT Studio exposes one workflow across image, editable, hybrid, and animation-enabled presentations.
 
 ## Package Layout
 
 ```text
 SKILL.md                         Agent-facing workflow contract (canonical)
-scripts/nestmold-ppt.py          Stable command gateway
-src/nestmold_ppt_studio/
+scripts/notrat-ppt.py          Stable command gateway
+src/notrat_ppt_studio/
   core/                          Runtime configuration, state, template catalog
   pipeline/                      Job preparation, lifecycle, assembly, reporting
   media/                         Image generation, provider adapters, chroma tools
@@ -34,8 +34,8 @@ Unless the user explicitly asks for full-slide image posters or pure static layo
 1. Choose **`editable`** (or `hybrid` if atmosphere background is needed).
 2. **Proactively design object animation** (3–7 meaningful steps per slide).
 3. Write `animation` on semantic objects with `@bapunhansdah/pptxgenjs@1.1.3`.
-4. Run `nestmold-ppt.py animate` when groups or multi-effect sequences are used.
-5. Run `nestmold-ppt.py validate` before delivery.
+4. Run `notrat-ppt.py animate` when groups or multi-effect sequences are used.
+5. Run `notrat-ppt.py validate` before delivery.
 
 Do **not** default to the image + `assemble` pipeline. That path pastes one bitmap per slide and cannot host entrance/emphasis/exit/path object timelines.
 
@@ -68,7 +68,7 @@ For **editable** decks, the primary deliverable is native PPTX from the animatio
 All automation goes through:
 
 ```text
-python scripts/nestmold-ppt.py <command> [args]
+python scripts/notrat-ppt.py <command> [args]
 ```
 
 Commands: `runtime`, `styles`, `image`, `chroma`, `prepare`, `dispatch`, `result`, `blocker`, `status`, `assemble`, `animate`, `validate`, and `animation-lab`.

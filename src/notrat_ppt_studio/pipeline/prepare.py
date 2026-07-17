@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Prepare per-slide image generation jobs for nestmold-ppt-studio.
+#!/usr/bin/env python3
+"""Prepare per-slide image generation jobs for notrat-ppt-studio.
 
 This script is deterministic. It does not call an image model. It turns a
 structured deck spec into one self-contained JSON job file per slide.
@@ -202,7 +202,7 @@ def _build_prompt(
     }
 
     prompt_parts = [
-        "# Nestmold PPT Studio Slide Image Prompt\n",
+        "# Notrat PPT Studio Slide Image Prompt\n",
         _format_block("Canvas", {
             "type": "16:9 full-slide PowerPoint image",
             "language": deck.get("language", "Chinese"),
@@ -357,7 +357,7 @@ def main() -> int:
     parser.add_argument("--write-template", help="Write an example deck spec JSON and exit.")
     parser.add_argument(
         "--selected-backend",
-        help="Confirmed image backend label, such as `built-in image tool` or `nestmold-ppt image`.",
+        help="Confirmed image backend label, such as `built-in image tool` or `notrat-ppt image`.",
     )
     parser.add_argument(
         "--max-concurrent-slides",

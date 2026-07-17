@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Print nestmold-ppt-studio slide generation job status."""
+#!/usr/bin/env python3
+"""Print notrat-ppt-studio slide generation job status."""
 
 from __future__ import annotations
 

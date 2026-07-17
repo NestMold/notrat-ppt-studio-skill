@@ -1,8 +1,8 @@
-# Nestmold PPT Studio
+# Notrat PPT Studio
 
 ## Publisher
 
-- Owner: [nestmold.cn](https://nestmold.cn)
+- Owner: [notrat.cn](https://notrat.cn)
 - Produced with: [notrat.cn](https://notrat.cn)
 - Version: 2.0.0
 - License: Proprietary for original materials; see `THIRD_PARTY_NOTICES.md` for incorporated third-party components.
@@ -31,7 +31,7 @@ Remote image providers may receive prompts and approved input assets. Review sen
 - **Proactive by default:** if the user does not forbid animation, the agent MUST add object animations without being asked.
 - **Default mode:** `editable` (+ object timeline). Use `hybrid` when atmosphere background is needed. Use `image` only when the user wants full-slide visuals without object timing.
 - Object animation requires `editable` or `hybrid` mode.
-- Backend: `@bapunhansdah/pptxgenjs@1.1.3` + `python scripts/nestmold-ppt.py animate|validate`.
+- Backend: `@bapunhansdah/pptxgenjs@1.1.3` + `python scripts/notrat-ppt.py animate|validate`.
 - Image-mode `assemble` only pastes full-slide bitmaps; it cannot create entrance/emphasis/exit/path object timelines.
 - Page transitions are not object animations. Do not substitute flip effects for object timing.
 - Outline must include per-slide **animation intent**; code must include `animation` fields.
@@ -40,6 +40,6 @@ Remote image providers may receive prompts and approved input assets. Review sen
 
 ## Runtime Contract
 
-Unified command gateway: `python scripts/nestmold-ppt.py <command>`. Style templates use stable IDs under `templates/styles/`; deck projects use `deck.manifest.json` and responsibility-based asset, job, state, content, work, and output directories.
+Unified command gateway: `python scripts/notrat-ppt.py <command>`. Style templates use stable IDs under `templates/styles/`; deck projects use `deck.manifest.json` and responsibility-based asset, job, state, content, work, and output directories.
 
 Default command path for animated decks: native build → `animate` (if groups/multi-effect) → `validate` → deliver. Do not default to `image` / `prepare` / `assemble`.

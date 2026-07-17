@@ -110,7 +110,7 @@ Slide 5: Experiment Results
     ![Model Architecture](assets/figures/model_architecture.png)
 ```
 
-Use Markdown image syntax inside the `Required images` list whenever the asset is local and renderable in the outline. This lets the user visually verify the exact asset mapping during outline review. Keep the descriptive text next to each image so `nestmold-ppt prepare` can convert the same asset into structured prompt input later (image/hybrid background paths).
+Use Markdown image syntax inside the `Required images` list whenever the asset is local and renderable in the outline. This lets the user visually verify the exact asset mapping during outline review. Keep the descriptive text next to each image so `notrat-ppt prepare` can convert the same asset into structured prompt input later (image/hybrid background paths).
 
 ## Confirm A Unified Visual Style
 
@@ -137,9 +137,9 @@ After the user chooses a style, create one final style direction and keep the vi
 Reusable style templates come from two locations:
 
 - Built-in templates: `templates/styles/<style-id>/template.json` plus `template.md`.
-- User templates: `${NESTMOLD_PPT_HOME:-~/.nestmold-ppt-studio}/templates/styles/<style-id>/` using the same two-file contract.
+- User templates: `${NOTRAT_PPT_HOME:-~/.notrat-ppt-studio}/templates/styles/<style-id>/` using the same two-file contract.
 
-Discover built-in templates with `python scripts/nestmold-ppt.py styles list`. Merge user templates by stable `style-id`; a user template with the same ID overrides the built-in template. Use templates as visual systems, not fixed page compositions.
+Discover built-in templates with `python scripts/notrat-ppt.py styles list`. Merge user templates by stable `style-id`; a user template with the same ID overrides the built-in template. Use templates as visual systems, not fixed page compositions.
 
 Example style confirmation:
 

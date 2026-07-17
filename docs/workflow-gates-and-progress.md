@@ -16,8 +16,8 @@ This workflow has explicit approval gates. Do not advance to a later phase until
 3. Visual style confirmation (tokens + animation tone; do not ask “要不要动画”)
 4. One native sample slide approval (with real object animations)
 5. Full native slide production (`@bapunhansdah/pptxgenjs@1.1.3`)
-6. OOXML postprocess when needed (`nestmold-ppt.py animate`)
-7. Structural validation (`nestmold-ppt.py validate`)
+6. OOXML postprocess when needed (`notrat-ppt.py animate`)
+7. Structural validation (`notrat-ppt.py validate`)
 8. QA, speaker notes, delivery report
 
 ### Image-mode phase order (only if user chose `image`)
@@ -72,7 +72,7 @@ Completion evidence (image mode):
 - `outline.md` approved; image backend confirmed; no object-animation claim.
 - One final `assets/slides/slide_XX.png` approved as style reference.
 - `prompts/slide_XX.json`, `deck.manifest.json`, and `state/run.json` exist.
-- Each worker recorded via `nestmold-ppt dispatch` / `result`.
+- Each worker recorded via `notrat-ppt dispatch` / `result`.
 - Every expected final image exists, `speech.md` is final, and `{deck_name}.pptx` exists via `assemble`.
 
 Do not mark a step complete just because the chat says it is complete; use real files or script-recorded state.

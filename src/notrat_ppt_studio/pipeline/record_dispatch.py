@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Record that a nestmold-ppt-studio slide job was dispatched to a subagent."""
+#!/usr/bin/env python3
+"""Record that a notrat-ppt-studio slide job was dispatched to a subagent."""
 
 from __future__ import annotations
 

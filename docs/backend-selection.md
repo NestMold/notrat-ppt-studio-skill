@@ -9,7 +9,7 @@ Read this before confirming the image backend or generating a sample slide.
 ## Supported Backends
 
 1. Notrat built-in image generation/editing tool, preferred when available.
-2. Local API/CLI fallback through `scripts/nestmold-ppt.py image`.
+2. Local API/CLI fallback through `scripts/notrat-ppt.py image`.
 
 ## Decision Rules
 
@@ -19,7 +19,7 @@ Read this before confirming the image backend or generating a sample slide.
 - Do not switch backends merely for easier file paths or batch automation.
 - Confirm the chosen backend before the first generated sample.
 - Keep the approved sample's backend, model family, mode, prompt source, and context-image preparation fixed for the remaining deck.
-- The fallback automatically reads `~/.nestmold-ppt-studio/.env`.
+- The fallback automatically reads `~/.notrat-ppt-studio/.env`.
 - Ask for API configuration only after fallback was intentionally selected and reports a real configuration or authentication error.
 
 If fallback is selected, read `cli-api-fallback.md`. Read `image-model-configuration.md` only when settings are missing or the user asks to change them.
@@ -35,6 +35,6 @@ Built-in path:
 Fallback path:
 
 ```text
-当前内置图片工具不可用或缺少本页所需能力，准备使用本地 API/CLI fallback，并读取 ~/.nestmold-ppt-studio/.env。确认后开始。
+当前内置图片工具不可用或缺少本页所需能力，准备使用本地 API/CLI fallback，并读取 ~/.notrat-ppt-studio/.env。确认后开始。
 ```
 

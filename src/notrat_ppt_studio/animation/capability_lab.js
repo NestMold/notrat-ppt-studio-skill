@@ -3,7 +3,7 @@ const path = require('path');
 
 const pptx = new PptxGenJS();
 pptx.layout = 'LAYOUT_WIDE';
-pptx.author = 'nestmold.cn';
+pptx.author = 'notrat.cn';
 pptx.subject = 'PPTX animation capability lab';
 pptx.title = 'PPTX 对象动画能力测试';
 pptx.lang = 'zh-CN';

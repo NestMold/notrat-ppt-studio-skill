@@ -3,7 +3,7 @@
 Read this before initializing the project directory, writing speaker notes, assembling the PPT, or sending the final report.
 
 > **Branch by mode.** Default delivery is **editable/hybrid native PPTX with object animations**.  
-> `nestmold-ppt.py assemble` is the **image-mode** assembler (bitmap pages). It cannot create object timelines.
+> `notrat-ppt.py assemble` is the **image-mode** assembler (bitmap pages). It cannot create object timelines.
 
 ## Project Directory
 
@@ -53,7 +53,7 @@ If the user did not specify a destination, use the current working directory or 
 You may initialize a project scaffold with:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py assemble {base_dir} {deck_name}.pptx --init
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py assemble {base_dir} {deck_name}.pptx --init
 ```
 
 ## Quality Check And Repair
@@ -85,7 +85,7 @@ Before assembling the PPT, inspect every slide image. Check:
 - No page number appears unless the user requested one.
 - Important elements do not overlap.
 
-If a slide has severe text or layout issues, regenerate it with a more constrained prompt. If a slide is mostly correct but has a localized issue, use the selected backend's edit capability when available. In CLI/API fallback mode, use `scripts/nestmold-ppt.py image edit --image {slide_path} --prompt ... --out {new_slide_path}` and replace the final slide only after validating the edited output.
+If a slide has severe text or layout issues, regenerate it with a more constrained prompt. If a slide is mostly correct but has a localized issue, use the selected backend's edit capability when available. In CLI/API fallback mode, use `scripts/notrat-ppt.py image edit --image {slide_path} --prompt ... --out {new_slide_path}` and replace the final slide only after validating the edited output.
 
 ## Speaker Notes
 
@@ -147,10 +147,10 @@ Use headings that assembly tooling can map back to slide numbers:
 
 ```bash
 # multi-effect sequences + true groups (input and output must differ)
-python {skill_root}/scripts/nestmold-ppt.py animate {deck}_raw.pptx {deck}.pptx
+python {skill_root}/scripts/notrat-ppt.py animate {deck}_raw.pptx {deck}.pptx
 
 # structural checks
-python {skill_root}/scripts/nestmold-ppt.py validate {deck}.pptx
+python {skill_root}/scripts/notrat-ppt.py validate {deck}.pptx
 ```
 
 - Build the raw native PPTX with `@bapunhansdah/pptxgenjs@1.1.3` and `animation` fields.
@@ -160,10 +160,10 @@ python {skill_root}/scripts/nestmold-ppt.py validate {deck}.pptx
 
 ### Image-mode assembly (explicit only)
 
-Before running `scripts/nestmold-ppt.py assemble` or the CLI/API fallback scripts, make sure the shared runtime exists. If `~/.nestmold-ppt-studio/.venv/bin/python` is missing, or if importing script dependencies fails, create or refresh the environment:
+Before running `scripts/notrat-ppt.py assemble` or the CLI/API fallback scripts, make sure the shared runtime exists. If `~/.notrat-ppt-studio/.venv/bin/python` is missing, or if importing script dependencies fails, create or refresh the environment:
 
 ```bash
-python3 {skill_root}/scripts/nestmold-ppt.py runtime bootstrap
+python3 {skill_root}/scripts/notrat-ppt.py runtime bootstrap
 ```
 
 This is an internal setup step for the skill. Do not ask the user to run these commands unless dependency installation fails and user approval or troubleshooting is required.
@@ -171,7 +171,7 @@ This is an internal setup step for the skill. Do not ask the user to run these c
 Run:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py assemble {base_dir} {deck_name}.pptx --aspect-ratio 16:9
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py assemble {base_dir} {deck_name}.pptx --aspect-ratio 16:9
 ```
 
 Important:
@@ -185,7 +185,7 @@ Important:
 - The script writes `{base_dir}/{deck_name}/{deck_name}.pptx`.
 - **This path cannot produce object entrance/emphasis/exit/path animations.** Final report must say so.
 
-`nestmold-ppt assemble` supports `16:9` and `4:3`. Use `16:9` unless the user requests otherwise. `nestmold-ppt image` loads `~/.nestmold-ppt-studio/.env` automatically for `OPENAI_API_KEY`, `OPENAI_BASE_URL`, and `NESTMOLD_PPT_IMAGE_MODEL`. Run `python3 {skill_root}/scripts/nestmold-ppt.py runtime doctor --check-api` when troubleshooting API access.
+`notrat-ppt assemble` supports `16:9` and `4:3`. Use `16:9` unless the user requests otherwise. `notrat-ppt image` loads `~/.notrat-ppt-studio/.env` automatically for `OPENAI_API_KEY`, `OPENAI_BASE_URL`, and `NOTRAT_PPT_IMAGE_MODEL`. Run `python3 {skill_root}/scripts/notrat-ppt.py runtime doctor --check-api` when troubleshooting API access.
 
 ## Final Report
 
@@ -206,9 +206,9 @@ Always report:
 Mode-specific extras:
 
 - **Editable/hybrid:** confirm fork version, `animate`/`validate` ran when needed, no leftover proxies.
-- **Image:** confirm image backend, every non-sample slide recorded with `nestmold-ppt result`, speaker notes written if applicable, and **explicitly no object animation**.
+- **Image:** confirm image backend, every non-sample slide recorded with `notrat-ppt result`, speaker notes written if applicable, and **explicitly no object animation**.
 
-If the deck's style is custom or noticeably adapted (extracted from user references, tuned during sampling, or otherwise not an unmodified built-in style), end with a one-sentence tip that the style can be saved to the personal style library for future reuse, for example: "如果你喜欢这套风格，可以说「保存这个风格」，我会把它存入个人风格库（`~/.nestmold-ppt-studio/templates/styles/`），以后可以直接复用，更新 skill 也不会丢失。" If the user agrees, read `docs/style-library.md`. Skip this tip when the deck used an unmodified built-in style.
+If the deck's style is custom or noticeably adapted (extracted from user references, tuned during sampling, or otherwise not an unmodified built-in style), end with a one-sentence tip that the style can be saved to the personal style library for future reuse, for example: "如果你喜欢这套风格，可以说「保存这个风格」，我会把它存入个人风格库（`~/.notrat-ppt-studio/templates/styles/`），以后可以直接复用，更新 skill 也不会丢失。" If the user agrees, read `docs/style-library.md`. Skip this tip when the deck used an unmodified built-in style.
 
 ## Prompting Principles
 

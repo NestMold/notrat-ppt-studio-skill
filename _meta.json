@@ -1,7 +1,7 @@
-﻿{
-    "name":  "nestmold-ppt-studio",
+{
+    "name":  "notrat-ppt-studio",
     "version":  "2.0.0",
-    "owner":  "nestmold.cn",
+    "owner":  "notrat.cn",
     "producer":  "notrat.cn",
     "license":  "Proprietary",
     "entry":  "SKILL.md"

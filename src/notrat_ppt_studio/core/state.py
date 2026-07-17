@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""State helpers for nestmold-ppt-studio slide generation runs."""
+#!/usr/bin/env python3
+"""State helpers for notrat-ppt-studio slide generation runs."""
 
 from __future__ import annotations
 

@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 sys.path.insert(0, str(SRC))
 
-from nestmold_ppt_studio.core.catalog import load_catalog
-from nestmold_ppt_studio.core.state import deck_manifest_path, run_state_path, write_json
+from notrat_ppt_studio.core.catalog import load_catalog
+from notrat_ppt_studio.core.state import deck_manifest_path, run_state_path, write_json
 
 
 class ArchitectureTests(unittest.TestCase):
@@ -20,7 +20,7 @@ class ArchitectureTests(unittest.TestCase):
         self.assertEqual(12, len(catalog))
         ids = [item["id"] for item in catalog]
         self.assertEqual(len(ids), len(set(ids)))
-        self.assertTrue(all(item["owner"] == "nestmold.cn" for item in catalog))
+        self.assertTrue(all(item["owner"] == "notrat.cn" for item in catalog))
         self.assertTrue(all(item["producer"] == "notrat.cn" for item in catalog))
 
     def test_project_contract_paths(self):

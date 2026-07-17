@@ -1,4 +1,4 @@
-﻿{
+{
     "schema_version":  "1.0",
     "id":  "data-dashboard",
     "name_zh":  "数据仪表盘",
@@ -12,7 +12,7 @@
                   "editable",
                   "hybrid"
               ],
-    "owner":  "nestmold.cn",
+    "owner":  "notrat.cn",
     "producer":  "notrat.cn",
     "prompt":  "template.md"
 }

@@ -15,7 +15,7 @@ Built-in templates:
 User templates:
 
 ```text
-${NESTMOLD_PPT_HOME:-~/.nestmold-ppt-studio}/templates/styles/<style-id>/
+${NOTRAT_PPT_HOME:-~/.notrat-ppt-studio}/templates/styles/<style-id>/
   template.json
   template.md
 ```
@@ -56,7 +56,7 @@ Before writing, check both built-in and user template catalogs. If the ID alread
   "status": "stable",
   "aspect_ratios": ["16:9"],
   "modes": ["image", "editable", "hybrid"],
-  "owner": "nestmold.cn",
+  "owner": "notrat.cn",
   "producer": "notrat.cn",
   "prompt": "template.md"
 }
@@ -69,7 +69,7 @@ Before writing, check both built-in and user template catalogs. If the ID alread
 Built-in templates are validated with:
 
 ```text
-python scripts/nestmold-ppt.py styles validate
+python scripts/notrat-ppt.py styles validate
 ```
 
 The catalog is discovered from metadata files; do not add a hard-coded registration list to another document.

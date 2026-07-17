@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Manage the cross-agent runtime for nestmold-ppt-studio.
+#!/usr/bin/env python3
+"""Manage the cross-agent runtime for notrat-ppt-studio.
 
 The runtime lives outside any specific agent installation so Notrat and other local agents can share one virtual environment and one API configuration.
 """
@@ -20,13 +20,13 @@ import urllib.request
 import venv
 
 
-DEFAULT_RUNTIME_HOME = "~/.nestmold-ppt-studio"
+DEFAULT_RUNTIME_HOME = "~/.notrat-ppt-studio"
 DEFAULT_MODEL = "gpt-image-2"
-ENV_FIELDS = ("OPENAI_API_KEY", "OPENAI_BASE_URL", "NESTMOLD_PPT_IMAGE_MODEL")
+ENV_FIELDS = ("OPENAI_API_KEY", "OPENAI_BASE_URL", "NOTRAT_PPT_IMAGE_MODEL")
 
 
 def _runtime_home() -> Path:
-    return Path(os.getenv("NESTMOLD_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
+    return Path(os.getenv("NOTRAT_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
 
 
 def _skill_root() -> Path:
@@ -87,7 +87,7 @@ def _quote_env_value(value: str) -> str:
 def _write_env_file(path: Path, values: Dict[str, str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
-        "# nestmold-ppt-studio shared runtime configuration",
+        "# notrat-ppt-studio shared runtime configuration",
         "# Used by Notrat and other local agents, and other local agents.",
     ]
     for key in ENV_FIELDS:
@@ -150,7 +150,7 @@ def _config(args: argparse.Namespace) -> int:
     if args.base_url is not None:
         values["OPENAI_BASE_URL"] = args.base_url.strip()
     if args.model is not None:
-        values["NESTMOLD_PPT_IMAGE_MODEL"] = args.model.strip()
+        values["NOTRAT_PPT_IMAGE_MODEL"] = args.model.strip()
 
     if args.clear_base_url:
         values.pop("OPENAI_BASE_URL", None)
@@ -225,11 +225,11 @@ def _doctor(args: argparse.Namespace) -> int:
     values = _load_env_values(home)
     api_key = values.get("OPENAI_API_KEY", "")
     base_url = values.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    model = values.get("NESTMOLD_PPT_IMAGE_MODEL", DEFAULT_MODEL)
+    model = values.get("NOTRAT_PPT_IMAGE_MODEL", DEFAULT_MODEL)
 
     print(f"OPENAI_API_KEY={'set (' + _mask_secret(api_key) + ')' if api_key else '<unset>'}")
     print(f"OPENAI_BASE_URL={base_url}")
-    print(f"NESTMOLD_PPT_IMAGE_MODEL={model}")
+    print(f"NOTRAT_PPT_IMAGE_MODEL={model}")
 
     if "gpt-image-" not in model:
         print("model check: warning, model name should contain 'gpt-image-'")
@@ -250,7 +250,7 @@ def _doctor(args: argparse.Namespace) -> int:
 
 
 def _build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Manage the nestmold-ppt-studio shared runtime")
+    parser = argparse.ArgumentParser(description="Manage the notrat-ppt-studio shared runtime")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     bootstrap = subparsers.add_parser("bootstrap", help="Create shared venv and install deps")

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import asyncio
 import base64
@@ -15,7 +15,7 @@ from .base import ImageProvider
 
 
 UrlOpen = Callable[..., Any]
-USER_AGENT = "nestmold-ppt-studio/1.0 (+https://nestmold.cn; produced-with=https://notrat.cn)"
+USER_AGENT = "notrat-ppt-studio/1.0 (+https://notrat.cn; produced-with=https://notrat.cn)"
 
 
 class AtlasCloudImageProvider(ImageProvider):

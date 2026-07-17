@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import asyncio
 import os
@@ -11,11 +11,11 @@ from .base import ImageProvider
 
 
 ClientFactory = Callable[[], Any]
-DEFAULT_RUNTIME_HOME = "~/.nestmold-ppt-studio"
+DEFAULT_RUNTIME_HOME = "~/.notrat-ppt-studio"
 
 
 def _runtime_home() -> Path:
-    return Path(os.getenv("NESTMOLD_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
+    return Path(os.getenv("NOTRAT_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
 
 
 def _runtime_python_path() -> str:
@@ -34,8 +34,8 @@ def _dependency_hint(package: str, *, upgrade: bool = False) -> str:
     runtime_python = _runtime_python_path()
     requirements = _skill_root() / "requirements.txt"
     return (
-        "Install nestmold-ppt-studio dependencies in the shared runtime first, for example "
-        f"`python3 {_skill_root() / 'scripts' / 'nestmold-ppt.py'} bootstrap`, "
+        "Install notrat-ppt-studio dependencies in the shared runtime first, for example "
+        f"`python3 {_skill_root() / 'scripts' / 'notrat-ppt.py'} bootstrap`, "
         f"or install {package} directly with `{runtime_python} -m pip install "
         f"{package_arg}`. Requirements file: `{requirements}`."
     )

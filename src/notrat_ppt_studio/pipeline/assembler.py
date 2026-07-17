@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 PPT 组装脚本
 
@@ -15,10 +15,10 @@ from typing import Dict, List, Optional, Tuple
 
 
 def dependency_hint() -> str:
-    runtime_home = os.path.expanduser(os.environ.get("NESTMOLD_PPT_HOME", "~/.nestmold-ppt-studio"))
+    runtime_home = os.path.expanduser(os.environ.get("NOTRAT_PPT_HOME", "~/.notrat-ppt-studio"))
     python = os.path.join(runtime_home, ".venv", "Scripts" if os.name == "nt" else "bin", "python.exe" if os.name == "nt" else "python")
     skill_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-    gateway = os.path.join(skill_root, "scripts", "nestmold-ppt.py")
+    gateway = os.path.join(skill_root, "scripts", "notrat-ppt.py")
     requirements = os.path.join(skill_root, "requirements.txt")
     return f"请运行: python {gateway} runtime bootstrap\n或直接运行: {python} -m pip install -r {requirements}"
 
@@ -329,13 +329,13 @@ def main():
   # 会在 /path/to/base/ 下查找 MyPresentation/ 文件夹
   # 从 MyPresentation/assets/slides/ 读取图片
   # 将 PPT 保存为 MyPresentation/MyPresentation.pptx
-  python scripts/nestmold-ppt.py assemble /path/to/base/ MyPresentation.pptx
+  python scripts/notrat-ppt.py assemble /path/to/base/ MyPresentation.pptx
 
   # 指定 4:3 宽高比
-  python scripts/nestmold-ppt.py assemble /path/to/base/ MyPresentation.pptx --aspect-ratio 4:3
+  python scripts/notrat-ppt.py assemble /path/to/base/ MyPresentation.pptx --aspect-ratio 4:3
 
   # 只初始化目录，不生成 PPT
-  python scripts/nestmold-ppt.py assemble /path/to/base/ MyPresentation.pptx --init
+  python scripts/notrat-ppt.py assemble /path/to/base/ MyPresentation.pptx --init
 
 文件夹结构要求:
   /path/to/base/MyPresentation/

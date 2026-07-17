@@ -3,7 +3,7 @@
 > **Canonical runtime contract:** the full mandatory animation production rules are now inlined in `SKILL.md` under **「动画硬约束（必须内联执行，不得只“参考文档”）」**.  
 > This file is the detailed English backup. Agents must execute the SKILL inline section; do not treat a soft route mention as optional reading.  
 > **Proactive default:** Agents must add object animations by default in `editable`/`hybrid` without waiting for the user to request them. See `SKILL.md` **默认模式与自觉动画策略（强制）**.
-> **Critical:** object animation only works in `editable` / `hybrid` modes via `@bapunhansdah/pptxgenjs@1.1.3` + `nestmold-ppt.py animate`. Image-mode `assemble` can only produce full-slide bitmaps and optional page transitions — never object timing.
+> **Critical:** object animation only works in `editable` / `hybrid` modes via `@bapunhansdah/pptxgenjs@1.1.3` + `notrat-ppt.py animate`. Image-mode `assemble` can only produce full-slide bitmaps and optional page transitions — never object timing.
 
 **Default reading rule:** for normal PPT tasks (editable/hybrid), treat this document as part of the mandatory production path, not an optional appendix. Agents must proactively plan and write object animations even when the user never says the word "animation".
 
@@ -152,9 +152,9 @@ This preserves editable child objects while presenting one animation target in P
 
 Reference implementation in this workspace:
 
-- `scripts/nestmold-ppt.py animate`
+- `scripts/notrat-ppt.py animate`
 - `notrat-video-ppt/animation_capability_lab.js`
-- `scripts/nestmold-ppt.py validate`
+- `scripts/notrat-ppt.py validate`
 
 Keep the raw PPTX. Never overwrite the last known-good deck during OOXML postprocessing.
 
@@ -193,8 +193,8 @@ Do not hand-edit preset IDs without a PowerPoint-authored reference or a tested 
 Run structural validation after every animation build:
 
 ```bash
-python scripts/nestmold-ppt.py animate raw.pptx grouped.pptx
-python scripts/nestmold-ppt.py validate grouped.pptx
+python scripts/notrat-ppt.py animate raw.pptx grouped.pptx
+python scripts/notrat-ppt.py validate grouped.pptx
 ```
 
 Required structural checks:

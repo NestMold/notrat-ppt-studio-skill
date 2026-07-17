@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Remove a solid chroma-key background from a nestmold-ppt-studio slide image.
+#!/usr/bin/env python3
+"""Remove a solid chroma-key background from a notrat-ppt-studio slide image.
 
 This helper supports the CLI/API transparent fallback workflow: generate an
 image on a flat key color, then convert that key color to alpha.
@@ -19,7 +19,7 @@ from typing import Tuple
 Color = Tuple[int, int, int]
 KEY_DOMINANCE_THRESHOLD = 16.0
 ALPHA_NOISE_FLOOR = 8
-DEFAULT_RUNTIME_HOME = "~/.nestmold-ppt-studio"
+DEFAULT_RUNTIME_HOME = "~/.notrat-ppt-studio"
 
 
 def _die(message: str, code: int = 1) -> None:
@@ -28,15 +28,15 @@ def _die(message: str, code: int = 1) -> None:
 
 
 def _dependency_hint(package: str) -> str:
-    home = Path(os.getenv("NESTMOLD_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
+    home = Path(os.getenv("NOTRAT_PPT_HOME", DEFAULT_RUNTIME_HOME)).expanduser()
     if os.name == "nt":
         python = home / ".venv" / "Scripts" / "python.exe"
     else:
         python = home / ".venv" / "bin" / "python"
     skill_root = Path(__file__).resolve().parents[3]
     return (
-        "Install nestmold-ppt-studio dependencies in the shared runtime first, for example "
-        f"`python3 {skill_root / 'scripts' / 'nestmold-ppt.py'} runtime bootstrap`, "
+        "Install notrat-ppt-studio dependencies in the shared runtime first, for example "
+        f"`python3 {skill_root / 'scripts' / 'notrat-ppt.py'} runtime bootstrap`, "
         f"or install {package} directly with `{python} -m pip install {package}`."
     )
 

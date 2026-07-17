@@ -1,7 +1,7 @@
-﻿{
+{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nestmold.cn/schemas/ppt-studio/slide-job.schema.json",
-  "title": "Nestmold PPT Studio Slide Job",
+  "$id": "https://notrat.cn/schemas/ppt-studio/slide-job.schema.json",
+  "title": "Notrat PPT Studio Slide Job",
   "type": "object",
   "required": ["schema_version", "slide", "title", "prompt", "input_images"],
   "properties": {

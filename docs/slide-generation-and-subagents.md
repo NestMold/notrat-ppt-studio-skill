@@ -9,7 +9,7 @@ Read this before full-deck image generation, preparing slide jobs, dispatching s
 
 ## Final Slide Image Generation
 
-Generate one image per slide with the selected image backend. Every final `slide_XX.png` must be produced by the built-in image tool or by `scripts/nestmold-ppt.py image`; programmatic rendering or hybrid text overlay is not acceptable for slide image creation.
+Generate one image per slide with the selected image backend. Every final `slide_XX.png` must be produced by the built-in image tool or by `scripts/notrat-ppt.py image`; programmatic rendering or hybrid text overlay is not acceptable for slide image creation.
 
 After the outline, visual style, image backend, and sample slide have all been approved, create final downstream artifacts if they do not already exist:
 
@@ -19,12 +19,12 @@ After the outline, visual style, image backend, and sample slide have all been a
 
 Do not create these final downstream artifacts before outline approval. If the user explicitly asks for pre-approval planning files, use `.draft.` filenames and synchronize them after approval.
 
-`deck.spec.json` must include `sample_generation_method` copied from the approved sample before ``nestmold-ppt prepare`` is run. The helper copies that method into each `jobs/slides/slide_XX.json` and into `deck.manifest.json`, so workers can see the exact backend, tool, mode, image context preparation, and output constraints used for the approved sample.
+`deck.spec.json` must include `sample_generation_method` copied from the approved sample before ``notrat-ppt prepare`` is run. The helper copies that method into each `jobs/slides/slide_XX.json` and into `deck.manifest.json`, so workers can see the exact backend, tool, mode, image context preparation, and output constraints used for the approved sample.
 
 Before full production, create structured per-slide image jobs. Prefer the bundled deterministic helper:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py prepare \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py prepare \
   --spec {base_dir}/{deck_name}/deck.spec.json \
   --out-dir {base_dir}/{deck_name} \
   --selected-backend "<confirmed backend label>" \
@@ -125,7 +125,7 @@ Avoid generating every slide as the same three-card layout. For each slide, choo
 }
 ```
 
-If preparing prompts manually instead of using ``nestmold-ppt prepare``, still save each full slide job under `{base_dir}/{deck_name}/jobs/slides/slide_XX.json` before generation. The saved job must include `prompt`, `out`, and `input_images`, including any deck-level approved sample slide style reference and all slide-level source images with explicit role labels.
+If preparing prompts manually instead of using ``notrat-ppt prepare``, still save each full slide job under `{base_dir}/{deck_name}/jobs/slides/slide_XX.json` before generation. The saved job must include `prompt`, `out`, and `input_images`, including any deck-level approved sample slide style reference and all slide-level source images with explicit role labels.
 
 ## Parallel Slide Generation With Subagents
 
@@ -136,18 +136,18 @@ Use the slide state scripts as the dispatch contract: the main agent spawns work
 Parent agent responsibilities:
 
 - Own `outline.md`, `deck.spec.json`, `prompts/`, `assets/slides/`, QA, `speech.md`, and final PPT assembly.
-- Run ``nestmold-ppt prepare`` or otherwise write full per-slide JSON jobs and `deck.manifest.json` before delegation.
-- Run ``nestmold-ppt status`` to see dispatch slots and pending slide ids before each batch.
+- Run ``notrat-ppt prepare`` or otherwise write full per-slide JSON jobs and `deck.manifest.json` before delegation.
+- Run ``notrat-ppt status`` to see dispatch slots and pending slide ids before each batch.
 - Ensure the approved sample slide is included in every non-sample job as a style-only input image when available.
-- Ensure every dispatched slide job is self-contained. If a slide summarizes, compares, continues, or refers to deck-wide concepts, put the required concepts into `deck_context` or the slide's `local_context` before running ``nestmold-ppt prepare``.
+- Ensure every dispatched slide job is self-contained. If a slide summarizes, compares, continues, or refers to deck-wide concepts, put the required concepts into `deck_context` or the slide's `local_context` before running ``notrat-ppt prepare``.
 - Ensure `sample_generation_method` is present in `deck.spec.json`, every `jobs/slides/slide_XX.json`, and `deck.manifest.json`; it must describe the exact backend/tool/mode used to generate the approved sample.
-- If the approved sample slide already exists and should not be regenerated, mark that slide in `deck.spec.json` with `sample_approved: true` or `approved_sample: true` before running ``nestmold-ppt prepare``; the helper records it as `accepted` when the final image file exists.
+- If the approved sample slide already exists and should not be regenerated, mark that slide in `deck.spec.json` with `sample_approved: true` or `approved_sample: true` before running ``notrat-ppt prepare``; the helper records it as `accepted` when the final image file exists.
 - In built-in `image_gen` mode, ensure every slide-level required local source image has already been inspected with `view_image` before any delegated job that depends on it.
 - In CLI/API fallback mode, ensure each JSON job lists the required source images and that the selected CLI path can use them; if the CLI path cannot attach input images for a slide, do not delegate that slide as a text-only replacement for the asset.
 - Spawn subagents with exactly one slide job each, up to `dispatch_slots_available`.
-- Immediately after each successful spawn, run ``nestmold-ppt dispatch`` with the real agent id and prompt path.
-- After each worker returns, visually check its selected output, then run ``nestmold-ppt result`` to copy the selected generated image into `assets/slides/slide_XX.png` and record backend provenance.
-- If a worker cannot use the selected image backend or cannot access required input images, run ``nestmold-ppt blocker`` and report the blocker.
+- Immediately after each successful spawn, run ``notrat-ppt dispatch`` with the real agent id and prompt path.
+- After each worker returns, visually check its selected output, then run ``notrat-ppt result`` to copy the selected generated image into `assets/slides/slide_XX.png` and record backend provenance.
+- If a worker cannot use the selected image backend or cannot access required input images, run ``notrat-ppt blocker`` and report the blocker.
 
 Subagent responsibilities:
 
@@ -167,10 +167,10 @@ Do not continue sequentially after the sample if subagents are part of the confi
 Dispatch loop:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py status \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py status \
   {base_dir}/{deck_name}
 
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py dispatch \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py dispatch \
   {base_dir}/{deck_name} \
   --slide slide_02 \
   --agent-id <agent id> \
@@ -181,7 +181,7 @@ Dispatch loop:
 Result recording:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py result \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py result \
   {base_dir}/{deck_name} \
   --slide slide_02 \
   --agent-id <agent id> \
@@ -193,7 +193,7 @@ Result recording:
 Blocker recording:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py blocker \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py blocker \
   {base_dir}/{deck_name} \
   --slide slide_02 \
   --agent-id <agent id> \
@@ -210,7 +210,7 @@ Save images as:
 ...
 ```
 
-After each image is generated, the parent agent should record it with ``nestmold-ppt result``, which copies it into `{base_dir}/{deck_name}/assets/slides/` and rejects backend provenance that does not match the selected backend or sample generation method. Do not leave final slide images only in a temporary or default generated-images directory, and do not manually mark slide state complete.
+After each image is generated, the parent agent should record it with ``notrat-ppt result``, which copies it into `{base_dir}/{deck_name}/assets/slides/` and rejects backend provenance that does not match the selected backend or sample generation method. Do not leave final slide images only in a temporary or default generated-images directory, and do not manually mark slide state complete.
 
 In CLI/API fallback mode, read `cli-api-fallback.md` for text-only generation commands, image-input limitations, edit commands, transparency rules, and runtime troubleshooting.
 
@@ -220,7 +220,7 @@ Final slide image naming rules:
 - Use zero-padded two-digit numbers for normal decks.
 - The approved sample slide should already have the correct `slide_XX.png` filename and should be reused directly.
 - Keep rejected variants, drafts, or reference images out of `assets/slides/`. If you need to preserve them, place them in the project root or a separate `drafts/` directory.
-- Before assembling, verify every expected `slide_XX.png` exists in `assets/slides/`, there are no missing or extra final slide images, and ``nestmold-ppt status`` shows all non-sample slide jobs as `recorded`.
+- Before assembling, verify every expected `slide_XX.png` exists in `assets/slides/`, there are no missing or extra final slide images, and ``notrat-ppt status`` shows all non-sample slide jobs as `recorded`.
 
 For Chinese decks, explicitly ask the image backend to render Chinese text accurately and avoid garbled characters.
 

@@ -1,9 +1,9 @@
-# Nestmold PPT Studio
+# Notrat PPT Studio
 
 **Professional PowerPoint production skill for Notrat / agent workflows**
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](./package.json)
-[![Owner](https://img.shields.io/badge/owner-nestmold.cn-0A66C2.svg)](https://nestmold.cn)
+[![Owner](https://img.shields.io/badge/owner-notrat.cn-0A66C2.svg)](https://notrat.cn)
 [![Producer](https://img.shields.io/badge/produced%20with-notrat.cn-6f42c1.svg)](https://notrat.cn)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./THIRD_PARTY_NOTICES.md)
 
@@ -34,15 +34,15 @@
 
 ## 简介
 
-**Nestmold PPT Studio** 是一套面向 Agent 的 PowerPoint 生产规范与运行时。它把文章、报告、方案、数据、讲稿、品牌资料或既有 PPT，转换为结构清晰、视觉统一、可交付的演示文稿。
+**Notrat PPT Studio** 是一套面向 Agent 的 PowerPoint 生产规范与运行时。它把文章、报告、方案、数据、讲稿、品牌资料或既有 PPT，转换为结构清晰、视觉统一、可交付的演示文稿。
 
 | 项目 | 说明 |
 |---|---|
 | 版本 | `2.0.0` |
 | 入口契约 | [`SKILL.md`](./SKILL.md) |
-| 命令网关 | `python scripts/nestmold-ppt.py <command>` |
+| 命令网关 | `python scripts/notrat-ppt.py <command>` |
 | 动画后端 | `@bapunhansdah/pptxgenjs@1.1.3` + OOXML 后处理 |
-| 出品 | `nestmold.cn` / 生产工具 `notrat.cn` |
+| 出品 | `notrat.cn` / 生产工具 `notrat.cn` |
 
 适用场景包括：
 
@@ -81,8 +81,8 @@
 editable（或 hybrid）
   → 大纲写清动画意图
   → 原生对象写入 animation
-  → nestmold-ppt.py animate（组合 / 多段序列）
-  → nestmold-ppt.py validate
+  → notrat-ppt.py animate（组合 / 多段序列）
+  → notrat-ppt.py validate
   → 交付
 ```
 
@@ -122,7 +122,7 @@ editable（或 hybrid）
 ## 仓库结构
 
 ```text
-nestmold-ppt-studio/
+notrat-ppt-studio/
 ├── SKILL.md                 # Agent 面向的权威工作流契约
 ├── skill-card.md            # 发布 / 目录卡片摘要
 ├── README.md                # 本文件
@@ -131,8 +131,8 @@ nestmold-ppt-studio/
 ├── THIRD_PARTY_NOTICES.md   # 第三方声明
 ├── _meta.json               # 技能元数据
 ├── scripts/
-│   └── nestmold-ppt.py      # 统一命令网关
-├── src/nestmold_ppt_studio/
+│   └── notrat-ppt.py      # 统一命令网关
+├── src/notrat_ppt_studio/
 │   ├── core/                # 运行时、状态、样式目录
 │   ├── pipeline/            # 准备、调度、装配、状态
 │   ├── media/               # 图像生成与 provider
@@ -158,7 +158,7 @@ nestmold-ppt-studio/
 
 ```bash
 # 进入技能目录
-cd nestmold-ppt-studio
+cd notrat-ppt-studio
 
 # Python 依赖
 pip install -r requirements.txt
@@ -178,10 +178,10 @@ npm install
 
 ```bash
 # 查看命令帮助
-python scripts/nestmold-ppt.py --help
+python scripts/notrat-ppt.py --help
 
 # 校验样式模板
-python scripts/nestmold-ppt.py styles validate
+python scripts/notrat-ppt.py styles validate
 
 # 动画能力实验台
 npm run animation:lab
@@ -199,7 +199,7 @@ python -m unittest discover -s tests -v
 所有自动化经统一入口：
 
 ```bash
-python scripts/nestmold-ppt.py <command> [args]
+python scripts/notrat-ppt.py <command> [args]
 ```
 
 | 命令 | 用途 | 模式相关性 |
@@ -249,8 +249,8 @@ python scripts/nestmold-ppt.py <command> [args]
 ## 动画与组合
 
 - 对象动画写在原生对象的 `animation` 字段（pptxgenjs fork）
-- 多段序列与真实组合走 `nestmold-ppt.py animate`
-- 结构检查：`nestmold-ppt.py validate`
+- 多段序列与真实组合走 `notrat-ppt.py animate`
+- 结构检查：`notrat-ppt.py validate`
 - 对象动画 ≠ 翻页切换 / Morph
 - 结构通过 ≠ 各端（PowerPoint / WPS / LibreOffice）播放完全一致
 
@@ -295,7 +295,7 @@ python scripts/nestmold-ppt.py <command> [args]
 校验：
 
 ```bash
-python scripts/nestmold-ppt.py styles validate
+python scripts/notrat-ppt.py styles validate
 ```
 
 ---
@@ -334,9 +334,9 @@ python scripts/nestmold-ppt.py styles validate
 
 ## 版权与第三方
 
-- **版权所有：** [nestmold.cn](https://nestmold.cn)
+- **版权所有：** [notrat.cn](https://notrat.cn)
 - **生产工具：** [notrat.cn](https://notrat.cn)
-- **许可：** 专有（Proprietary / `UNLICENSED`）。未经 `nestmold.cn` 书面授权，不得复制、分发、转售或移除版权声明。
+- **许可：** 专有（Proprietary / `UNLICENSED`）。未经 `notrat.cn` 书面授权，不得复制、分发、转售或移除版权声明。
 - 部分组件改编自 `codex-ppt`（ningzimu，MIT-0）；动画集成 `@bapunhansdah/pptxgenjs@1.1.3`（MIT）。详见 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)。
 
 ---
@@ -349,17 +349,17 @@ python scripts/nestmold-ppt.py styles validate
 2. 未提交本地密钥、`.env`、客户 deck 成品与缓存
 3. `README.md` / `SKILL.md` / `THIRD_PARTY_NOTICES.md` 版权声明完整
 4. `npm install` 与 `pip install -r requirements.txt` 可复现
-5. `python scripts/nestmold-ppt.py styles validate` 与测试通过
+5. `python scripts/notrat-ppt.py styles validate` 与测试通过
 
 ### 建议的 Git 初始化
 
 ```bash
-cd nestmold-ppt-studio
+cd notrat-ppt-studio
 git init
 git add .
-git commit -m "chore: initial public package for nestmold-ppt-studio v2.0.0"
+git commit -m "chore: initial public package for notrat-ppt-studio v2.0.0"
 git branch -M main
-git remote add origin https://github.com/<YOUR_ORG_OR_USER>/nestmold-ppt-studio.git
+git remote add origin https://github.com/<YOUR_ORG_OR_USER>/notrat-ppt-studio.git
 git push -u origin main
 ```
 
@@ -380,4 +380,4 @@ git push -u origin main
 
 ---
 
-© nestmold.cn · Produced with notrat.cn · v2.0.0
+© notrat.cn · Produced with notrat.cn · v2.0.0

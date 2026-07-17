@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional
 
 
 class ImageProvider(ABC):
-    """Common API shape used by `nestmold-ppt image` command handlers."""
+    """Common API shape used by `notrat-ppt image` command handlers."""
 
     @abstractmethod
     def generate(self, payload: Dict[str, Any]) -> List[str]:

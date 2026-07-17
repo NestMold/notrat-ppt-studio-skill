@@ -1,4 +1,4 @@
-﻿"""Discover and validate reusable Nestmold style templates."""
+"""Discover and validate reusable Notrat style templates."""
 
 from __future__ import annotations
 

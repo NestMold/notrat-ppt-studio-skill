@@ -1,4 +1,4 @@
-﻿# CLI/API Fallback
+# CLI/API Fallback
 
 Use this reference only after CLI/API fallback has been selected and confirmed with the user. The main `SKILL.md` owns the backend decision rules; this document owns fallback commands, runtime setup, image-input limits, editing, transparency, and troubleshooting.
 
@@ -6,22 +6,22 @@ Let `{skill_root}` mean the directory containing `SKILL.md`.
 
 ## Runtime Setup
 
-CLI/API fallback commands use the shared runtime environment. Before running `scripts/nestmold-ppt.py assemble` or fallback image commands, make sure the shared runtime exists. If `~/.nestmold-ppt-studio/.venv/bin/python` is missing, or if importing script dependencies fails, create or refresh the environment:
+CLI/API fallback commands use the shared runtime environment. Before running `scripts/notrat-ppt.py assemble` or fallback image commands, make sure the shared runtime exists. If `~/.notrat-ppt-studio/.venv/bin/python` is missing, or if importing script dependencies fails, create or refresh the environment:
 
 ```bash
-python3 {skill_root}/scripts/nestmold-ppt.py runtime bootstrap
+python3 {skill_root}/scripts/notrat-ppt.py runtime bootstrap
 ```
 
 This is an internal setup step for the skill. Do not ask the user to run it unless dependency installation fails and user approval or troubleshooting is required.
 
-The fallback CLI loads `~/.nestmold-ppt-studio/.env` automatically for `OPENAI_API_KEY`, `OPENAI_BASE_URL`, and `NESTMOLD_PPT_IMAGE_MODEL`. Do not manually parse `.env`. For API key, base URL, model, and config troubleshooting, read `image-model-configuration.md` only after the fallback CLI reports missing or invalid configuration, when the user explicitly wants to change those settings, or when a real API call reports authentication, permission, base URL, or model availability failure.
+The fallback CLI loads `~/.notrat-ppt-studio/.env` automatically for `OPENAI_API_KEY`, `OPENAI_BASE_URL`, and `NOTRAT_PPT_IMAGE_MODEL`. Do not manually parse `.env`. For API key, base URL, model, and config troubleshooting, read `image-model-configuration.md` only after the fallback CLI reports missing or invalid configuration, when the user explicitly wants to change those settings, or when a real API call reports authentication, permission, base URL, or model availability failure.
 
 ## Generate One Slide
 
 Basic generation command:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py image generate \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py image generate \
   --model gpt-image-2 \
   --prompt-file {prompt_file} \
   --size 2560x1440 \
@@ -35,7 +35,7 @@ When generating from saved `prompts/slide_XX.json` files, use the job's `prompt`
 
 ```bash
 python3 -c 'import json, pathlib; print(json.loads(pathlib.Path("{base_dir}/{deck_name}/prompts/slide_01.json").read_text())["prompt"])' | \
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py image generate \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py image generate \
   --prompt-file - \
   --size 2560x1440 \
   --quality medium \
@@ -58,7 +58,7 @@ The fallback CLI defaults to 2K 16:9 landscape output, `2560x1440`, because it k
 If a slide is mostly correct but has a localized issue, use the selected backend's edit capability when available. In CLI/API fallback mode:
 
 ```bash
-~/.nestmold-ppt-studio/.venv/bin/python {skill_root}/scripts/nestmold-ppt.py image edit \
+~/.notrat-ppt-studio/.venv/bin/python {skill_root}/scripts/notrat-ppt.py image edit \
   --image {slide_path} \
   --prompt {edit_prompt} \
   --out {new_slide_path}
@@ -71,17 +71,17 @@ Replace the final slide only after validating the edited output.
 Transparent-background requests:
 
 - Built-in mode should use a flat chroma-key background and local removal when appropriate.
-- CLI/API fallback should also prefer chroma-key generation plus `scripts/nestmold-ppt.py chroma` for simple opaque subjects.
+- CLI/API fallback should also prefer chroma-key generation plus `scripts/notrat-ppt.py chroma` for simple opaque subjects.
 - `gpt-image-2` does not support `--background transparent`. If the user needs true model-native transparency, ask before switching to `--model gpt-image-1.5 --background transparent --output-format png`.
 
 ## Assembly And Doctor
 
-`nestmold-ppt assemble` supports `16:9` and `4:3`. Use `16:9` unless the user requests otherwise.
+`notrat-ppt assemble` supports `16:9` and `4:3`. Use `16:9` unless the user requests otherwise.
 
 Run the API doctor only when troubleshooting fallback API access:
 
 ```bash
-python3 {skill_root}/scripts/nestmold-ppt.py runtime doctor --check-api
+python3 {skill_root}/scripts/notrat-ppt.py runtime doctor --check-api
 ```
 
 

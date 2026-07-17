@@ -36,7 +36,7 @@ The job / handoff is the source of truth for slide content, objects, and animati
 8. Hybrid: place background image as static layer; animate only foreground natives; never bake key copy into the background.
 9. If the same target needs multiple effects or a true group:
    - emit named members / proxies per `SKILL.md` animation hard rules
-   - leave final grouping to parent `nestmold-ppt.py animate` unless the parent explicitly asked this worker to postprocess
+   - leave final grouping to parent `notrat-ppt.py animate` unless the parent explicitly asked this worker to postprocess
 10. Write candidates only under `output_candidate_dir`.
 11. Do not edit the deck manifest, final output PPTX, or sibling slides.
 12. If the animation backend is unavailable, return a blocker — do not silently switch to image + assemble.

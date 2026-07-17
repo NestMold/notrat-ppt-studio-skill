@@ -20,7 +20,7 @@ Read this for native editable decks and hybrid decks (bitmap atmosphere + editab
 - Chart data remains editable.
 - Cards, process nodes, and labels keep independent semantic identity via stable `objectName`.
 - **Object animation is mandatory** unless the user forbids it.
-- Backend: `@bapunhansdah/pptxgenjs@1.1.3` for `animation` fields; multi-effect sequences and true groups via `nestmold-ppt.py animate`.
+- Backend: `@bapunhansdah/pptxgenjs@1.1.3` for `animation` fields; multi-effect sequences and true groups via `notrat-ppt.py animate`.
 
 ### `hybrid`
 
@@ -161,8 +161,8 @@ npm install @bapunhansdah/pptxgenjs@1.1.3
 
 ```bash
 # multi-effect + true groups
-python scripts/nestmold-ppt.py animate raw.pptx grouped.pptx
-python scripts/nestmold-ppt.py validate grouped.pptx
+python scripts/notrat-ppt.py animate raw.pptx grouped.pptx
+python scripts/notrat-ppt.py validate grouped.pptx
 ```
 
 - Pin fork version `1.1.3`.

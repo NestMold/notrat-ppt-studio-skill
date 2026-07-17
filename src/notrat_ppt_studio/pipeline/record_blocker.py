@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-"""Record a blocker that prevents a nestmold-ppt-studio slide job from completing."""
+#!/usr/bin/env python3
+"""Record a blocker that prevents a notrat-ppt-studio slide job from completing."""
 
 from __future__ import annotations
 
