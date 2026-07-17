@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs & temp
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# Generated deck outputs (keep sources, ignore runtime products)
+**/output/*_raw.pptx
+**/work/candidates/
+**/state/run.json
+*.pptx
+!docs/**/*.pptx
+
+# Local experiment / media dumps
+*.local.json
+.coverage.*
+
+# Package manager locks optional — keep package-lock if present for repro
+# package-lock.json

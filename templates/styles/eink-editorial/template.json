@@ -1,0 +1,19 @@
+﻿{
+    "schema_version":  "1.0",
+    "id":  "eink-editorial",
+    "name_zh":  "电子墨水杂志",
+    "kind":  "style",
+    "status":  "stable",
+    "aspect_ratios":  [
+                          "16:9"
+                      ],
+    "modes":  [
+                  "image",
+                  "editable",
+                  "hybrid"
+              ],
+    "owner":  "nestmold.cn",
+    "producer":  "notrat.cn",
+    "prompt":  "template.md"
+}
+

@@ -1,0 +1,19 @@
+﻿{
+    "schema_version":  "1.0",
+    "id":  "research-defense",
+    "name_zh":  "科研答辩",
+    "kind":  "style",
+    "status":  "stable",
+    "aspect_ratios":  [
+                          "16:9"
+                      ],
+    "modes":  [
+                  "image",
+                  "editable",
+                  "hybrid"
+              ],
+    "owner":  "nestmold.cn",
+    "producer":  "notrat.cn",
+    "prompt":  "template.md"
+}
+

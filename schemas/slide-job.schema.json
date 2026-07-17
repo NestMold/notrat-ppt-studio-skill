@@ -1,0 +1,30 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nestmold.cn/schemas/ppt-studio/slide-job.schema.json",
+  "title": "Nestmold PPT Studio Slide Job",
+  "type": "object",
+  "required": ["schema_version", "slide", "title", "prompt", "input_images"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "slide": {"type": "integer", "minimum": 1},
+    "title": {"type": "string"},
+    "prompt": {"type": "string", "minLength": 1},
+    "expected_backend": {"type": ["string", "null"]},
+    "sample_generation_method": {"type": ["object", "null"]},
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": {"type": "string"},
+          "role": {"type": "string"},
+          "fidelity": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
+

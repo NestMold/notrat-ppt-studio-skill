@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nestmold.cn/schemas/ppt-studio/style-template.schema.json",
+  "title": "Nestmold PPT Studio Style Template",
+  "type": "object",
+  "required": ["schema_version", "id", "name_zh", "kind", "status", "aspect_ratios", "modes", "owner", "producer", "prompt"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "name_zh": {"type": "string", "minLength": 1},
+    "kind": {"const": "style"},
+    "status": {"enum": ["experimental", "stable", "deprecated"]},
+    "aspect_ratios": {"type": "array", "items": {"enum": ["16:9", "4:3"]}, "minItems": 1, "uniqueItems": true},
+    "modes": {"type": "array", "items": {"enum": ["image", "editable", "hybrid"]}, "minItems": 1, "uniqueItems": true},
+    "owner": {"const": "nestmold.cn"},
+    "producer": {"const": "notrat.cn"},
+    "prompt": {"type": "string", "pattern": "^[^/\\\\]+\\.md$"}
+  },
+  "additionalProperties": false
+}
+

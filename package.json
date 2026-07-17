@@ -1,0 +1,16 @@
+﻿{
+    "name":  "nestmold-ppt-studio",
+    "version":  "2.0.0",
+    "private":  true,
+    "description":  "Unified editable, image, hybrid, and animated PowerPoint production runtime.",
+    "license":  "UNLICENSED",
+    "scripts":  {
+                    "cli":  "python scripts/nestmold-ppt.py",
+                    "styles:validate":  "python scripts/nestmold-ppt.py styles validate",
+                    "animation:lab":  "node src/nestmold_ppt_studio/animation/capability_lab.js",
+                    "test":  "python -m unittest discover -s tests -v"
+                },
+    "dependencies":  {
+                         "@bapunhansdah/pptxgenjs":  "1.1.3"
+                     }
+}

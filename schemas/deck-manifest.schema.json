@@ -1,0 +1,34 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nestmold.cn/schemas/ppt-studio/deck-manifest.schema.json",
+  "title": "Nestmold PPT Studio Deck Manifest",
+  "type": "object",
+  "required": ["schema_version", "run_status", "deck_name", "slides", "updated_at"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_status": {"type": "string"},
+    "deck_name": {"type": ["string", "null"]},
+    "selected_backend": {"type": ["string", "null"]},
+    "sample_generation_method": {"type": ["object", "null"]},
+    "max_concurrent_slides": {"type": "integer", "minimum": 1},
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slide_id", "number", "job", "out", "status"],
+        "properties": {
+          "slide_id": {"type": "string", "pattern": "^slide_[0-9]+$"},
+          "number": {"type": "integer", "minimum": 1},
+          "title": {"type": "string"},
+          "job": {"type": "string"},
+          "out": {"type": "string"},
+          "status": {"enum": ["pending", "dispatched", "recorded", "accepted", "blocked"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "updated_at": {"type": "string"}
+  },
+  "additionalProperties": true
+}
+
