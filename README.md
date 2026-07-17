@@ -2,8 +2,8 @@
 
 **Professional PowerPoint production skill for Notrat / agent workflows**
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](./package.json)
-[![Owner](https://img.shields.io/badge/owner-notrat.cn-0A66C2.svg)](https://notrat.cn)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](./package.json)
+[![Owner](https://img.shields.io/badge/owner-nestmold.cn-0A66C2.svg)](https://nestmold.cn)
 [![Producer](https://img.shields.io/badge/produced%20with-notrat.cn-6f42c1.svg)](https://notrat.cn)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./THIRD_PARTY_NOTICES.md)
 
