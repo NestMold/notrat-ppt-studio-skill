@@ -1,0 +1,15 @@
+{
+    "name":  "notrat-ppt-studio",
+    "version":  "1.0.0",
+    "description":  "Unified editable, image, hybrid, and animated PowerPoint production runtime.",
+    "license":  "MIT",
+    "scripts":  {
+                    "cli":  "python scripts/notrat-ppt.py",
+                    "styles:validate":  "python scripts/notrat-ppt.py styles validate",
+                    "animation:lab":  "node src/notrat_ppt_studio/animation/capability_lab.js",
+                    "test":  "python -m unittest discover -s tests -v"
+                },
+    "dependencies":  {
+                         "@bapunhansdah/pptxgenjs":  "1.1.3"
+                     }
+}

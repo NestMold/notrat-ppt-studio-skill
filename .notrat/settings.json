@@ -1,0 +1,29 @@
+{
+  "theme": "light",
+  "fontSize": 14,
+  "tabSize": 4,
+  "wordWrap": true,
+  "lineNumbers": true,
+  "autoSave": true,
+  "autoSaveDelay": 1000,
+  "expandedFolders": [],
+  "openFiles": [
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\README.md",
+      "name": "README.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\skill-card.md",
+      "name": "skill-card.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\SKILL.md",
+      "name": "SKILL.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\index.html",
+      "name": "index.html"
+    }
+  ],
+  "currentFile": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\index.html"
+}

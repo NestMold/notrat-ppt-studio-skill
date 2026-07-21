@@ -1,0 +1,19 @@
+{
+    "schema_version":  "1.0",
+    "id":  "handdrawn-technical",
+    "name_zh":  "手绘技术解释",
+    "kind":  "style",
+    "status":  "stable",
+    "aspect_ratios":  [
+                          "16:9"
+                      ],
+    "modes":  [
+                  "image",
+                  "editable",
+                  "hybrid"
+              ],
+    "owner":  "notrat.cn",
+    "producer":  "notrat.cn",
+    "prompt":  "template.md"
+}
+

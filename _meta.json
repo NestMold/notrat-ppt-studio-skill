@@ -1,0 +1,8 @@
+{
+    "name":  "notrat-ppt-studio",
+    "version":  "1.0.0",
+    "owner":  "notrat.cn",
+    "producer":  "notrat.cn",
+    "license":  "MIT",
+    "entry":  "SKILL.md"
+}
