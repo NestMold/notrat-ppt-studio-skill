@@ -1,3 +1,7 @@
+﻿<p align="center">
+  <img src="./assets/notrat.png" width="120" alt="Notrat PPT Studio">
+</p>
+
 # Notrat PPT Studio
 
 **Professional PowerPoint production skill for Notrat / agent workflows**
