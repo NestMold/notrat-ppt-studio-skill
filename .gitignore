@@ -60,5 +60,5 @@ temp/
 *.local.json
 .coverage.*
 
-# Package manager locks optional — keep package-lock if present for repro
-# package-lock.json
+# Frontend (landing page, not part of skill runtime)
+frontend/

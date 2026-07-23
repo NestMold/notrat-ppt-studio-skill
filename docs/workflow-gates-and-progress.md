@@ -1,78 +1,126 @@
-# Workflow Gates And Progress
+# Workflow Gates & Progress
 
-Read this before creating downstream artifacts, advancing between phases, or reporting progress.
+## 7 步标准工作流
 
-> **Default path is editable + proactive object animation.**  
-> Image backend confirmation, full-slide image jobs, and `assemble` apply only when mode is `image` (or hybrid background generation). Do not force the image pipeline on normal PPT tasks.
+每一步都是一个"门"（gate）——必须通过才能进入下一步。
 
-## Mandatory Phase Gates
+```
+Step 1: 理解任务
+  Gate: 主题明确 + 模式确定 + 用户确认
+  ↓
+Step 2: 大纲设计
+  Gate: 大纲完整 + 每页有 animation_intent + 用户确认
+  ↓
+Step 3: 样式选择
+  Gate: style.json 有效 (styles validate 通过)
+  ↓
+Step 4: 逐页渲染
+  Gate: 所有页面渲染完成 (status: all completed)
+  ↓
+Step 5: 组装
+  Gate: PPTX 可打开 + 页序正确
+  ↓
+Step 6: 动画后处理 (editable/hybrid)
+  Gate: animate 完成 + validate 通过
+  ↓
+Step 7: 交付
+  Gate: 报告齐全 + 用户验收
+```
 
-This workflow has explicit approval gates. Do not advance to a later phase until the previous phase has been approved by the user, unless the user explicitly asks to skip that confirmation.
+## 各步骤检查清单
 
-### Default phase order (`editable` / `hybrid`)
+### Step 1: 理解任务
 
-1. Source reading and asset extraction
-2. Outline confirmation (**includes mode + animation intent per slide**)
-3. Visual style confirmation (tokens + animation tone; do not ask “要不要动画”)
-4. One native sample slide approval (with real object animations)
-5. Full native slide production (`@bapunhansdah/pptxgenjs@1.1.3`)
-6. OOXML postprocess when needed (`notrat-ppt.py animate`)
-7. Structural validation (`notrat-ppt.py validate`)
-8. QA, speaker notes, delivery report
+- [ ] 主题与演示目标
+- [ ] 目标受众
+- [ ] 页数或时长
+- [ ] 语言与语气
+- [ ] 品牌色 / Logo / 字体
+- [ ] 模式确认（未指定 → editable）
+- [ ] 动画策略（未禁止 → 自觉加动画）
 
-### Image-mode phase order (only if user chose `image`)
+### Step 2: 大纲设计
 
-1. Source reading and asset extraction
-2. Outline confirmation (state no object animation)
-3. Visual style confirmation
-4. Image backend confirmation
-5. One sample slide image approval
-6. Full slide image generation
-7. QA, speaker notes finalization, and `assemble` PPT
+- [ ] 每页有 `role` 和 `title`
+- [ ] 每页有 `animation_intent`
+- [ ] 动画意图不是"统一 flyin"
+- [ ] 页面之间叙事连贯
+- [ ] 无冗余页（每页承担一个任务）
 
-Hard rules:
+### Step 3: 样式选择
 
-- Before outline approval, do not create final `deck_spec.json`, `speech.md`, prompt job files, slide images, or `.pptx` files.
-- If you need an internal planning artifact before approval, name it with `.draft.` such as `deck_spec.draft.json` or `speech.draft.md`, and clearly report that it is not final.
-- Downstream artifacts should be created only after the relevant gates have been approved.
-- If the deck uses required source images, stop at outline confirmation and ask the user to verify the slide-to-image mapping before style selection or generation.
-- **Do not enter image backend / `prepare` / `dispatch` / `assemble` solely because those docs exist.** Enter them only for `image` mode or hybrid backgrounds.
-- **Do not mark animation complete** unless object `animation` fields exist (editable/hybrid) or the outline explicitly chose static/image-only.
+```bash
+python scripts/notrat-ppt.py styles validate <style-id>
+```
+- [ ] style.json 存在且格式正确
+- [ ] 色彩对比度 ≥ 4.5:1（正文 vs 背景）
 
-## Visible Progress Plan
+### Step 4: 逐页渲染
 
-### Editable / hybrid checklist
+```bash
+python scripts/notrat-ppt.py status
+```
+- [ ] 所有页面状态为 `completed`
+- [ ] 无 `blocked` 页面
+- [ ] 内容无溢出（layout-report.json 无 overflow）
 
-1. Prepare source, outline (mode + animation intent), and style decisions.
-2. Generate and approve one **native** sample slide with object animations.
-3. Produce remaining native slides with `animation` fields.
-4. Run `animate` when groups / multi-effect sequences are used; keep raw PPTX.
-5. Run `validate` and fix structural issues.
-6. Speaker notes, final QA, and delivery report (mode, animation classes, paths).
+### Step 5: 组装
 
-Completion evidence:
+- [ ] PPTX 可在 PowerPoint / WPS 打开
+- [ ] 页序与大纲一致
+- [ ] 无空白页 / 重复页
 
-- Outline approved with `mode: editable|hybrid` and per-slide animation intent.
-- Sample native slide approved (user confirmed layout **and** animation rhythm).
-- Final PPTX built from animation-capable backend (not bitmap-only `assemble`).
-- If groups/multi-effect: `*_raw.pptx` + postprocessed PPTX + validate pass.
-- Delivery report states animation classes and any missing playback QA.
+### Step 6: 动画后处理
 
-### Image-mode checklist
+```bash
+python scripts/notrat-ppt.py animate <pptx_path>
+python scripts/notrat-ppt.py validate <pptx_path>
+```
+- [ ] `animate` 无报错
+- [ ] `validate` 输出 `passed`
+- [ ] animation-report.json 中每页 ≥ 3 个动画
+- [ ] 无装饰元素被误加动画
 
-1. Prepare source, outline, style, and backend decisions.
-2. Generate and approve one sample slide image.
-3. Prepare slide jobs and slide state.
-4. Dispatch slide subagents.
-5. Record generated slide results.
-6. QA, repair, notes, and PPT assembly.
+### Step 7: 交付
 
-Completion evidence (image mode):
+- [ ] PPTX 文件命名正确（`<项目名>_<名称>_v01.pptx`）
+- [ ] 附带 layout-report.json + animation-report.json
+- [ ] 演讲者备注与揭示顺序对齐
+- [ ] 版权署名：`Copyright © notrat.cn`
 
-- `outline.md` approved; image backend confirmed; no object-animation claim.
-- One final `assets/slides/slide_XX.png` approved as style reference.
-- `prompts/slide_XX.json`, `deck.manifest.json`, and `state/run.json` exist.
-- Each worker recorded via `notrat-ppt dispatch` / `result`.
-- Every expected final image exists, `speech.md` is final, and `{deck_name}.pptx` exists via `assemble`.
+## 状态机
 
-Do not mark a step complete just because the chat says it is complete; use real files or script-recorded state.
+```
+draft → building → review → delivered
+  ↑         │         │
+  └─────────┴─────────┘
+     (用户要求修改时回退)
+```
+
+| 状态 | 含义 | 允许操作 |
+|------|------|---------|
+| `draft` | 大纲阶段 | 编辑大纲 |
+| `building` | 逐页渲染中 | dispatch / result / blocker |
+| `review` | 组装 + 动画 + 校验 | animate / validate |
+| `delivered` | 已交付 | 版本递增 |
+
+## 阻塞处理
+
+当某页无法继续时：
+
+```bash
+python scripts/notrat-ppt.py blocker --page <N> --reason "<原因>"
+```
+
+Agent 应：
+1. 记录阻塞原因
+2. 跳过该页继续其他页
+3. 向用户报告阻塞项
+4. 解决后清除阻塞并继续
+
+## 版本管理
+
+- 每次交付递增版本号：`_v01` → `_v02` → `_v03`
+- **禁止覆盖**最后一个可用版本
+- 后处理前的原始文件保留为 `_raw.pptx`
+- 用户要求"改一下"时 → 新版本，不覆盖旧版本

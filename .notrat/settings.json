@@ -6,24 +6,110 @@
   "lineNumbers": true,
   "autoSave": true,
   "autoSaveDelay": 1000,
-  "expandedFolders": [],
+  "expandedFolders": [
+    "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\tests",
+    "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\assets",
+    "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend",
+    "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\scripts",
+    "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets"
+  ],
   "openFiles": [
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\SKILL.md",
+      "name": "SKILL.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\src\\notrat_ppt_studio\\pipeline\\record_dispatch.py",
+      "name": "record_dispatch.py"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\THIRD_PARTY_NOTICES.md",
+      "name": "THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\requirements.txt",
+      "name": "requirements.txt"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\docs\\object-animation-and-grouping.md",
+      "name": "object-animation-and-grouping.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\docs\\style-library.md",
+      "name": "style-library.md"
+    },
     {
       "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\README.md",
       "name": "README.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\LICENSE",
+      "name": "LICENSE"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\prompts\\workers\\render-slide.md",
+      "name": "render-slide.md"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\prompts\\workers\\render-editable-slide.md",
+      "name": "render-editable-slide.md"
     },
     {
       "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\skill-card.md",
       "name": "skill-card.md"
     },
     {
-      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\SKILL.md",
-      "name": "SKILL.md"
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\index.html",
+      "name": "index.html"
     },
     {
-      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\index.html",
-      "name": "index.html"
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets\\notrat.png",
+      "name": "notrat.png"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets\\demo-flyin.gif",
+      "name": "demo-flyin.gif"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets\\skillhub.png",
+      "name": "skillhub.png"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\tests\\test_architecture.py",
+      "name": "test_architecture.py"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets\\demo-hybrid-animation.gif",
+      "name": "demo-hybrid-animation.gif"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\schemas\\deck-manifest.schema.json",
+      "name": "deck-manifest.schema.json"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\schemas\\style-template.schema.json",
+      "name": "style-template.schema.json"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\assets\\nav-logo.png",
+      "name": "nav-logo.png"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend/1.html",
+      "name": "1.html"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\1.html",
+      "name": "1.html"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\package-lock.json",
+      "name": "package-lock.json"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\package.json",
+      "name": "package.json"
     }
   ],
-  "currentFile": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\index.html"
+  "currentFile": "C:\\Users\\Administrator\\Downloads\\notrat-ppt-studio-skill-main (1)\\notrat-ppt-studio-skill-main\\frontend\\1.html"
 }

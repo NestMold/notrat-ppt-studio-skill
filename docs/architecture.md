@@ -1,97 +1,113 @@
 # Architecture
 
-Notrat PPT Studio exposes one workflow across image, editable, hybrid, and animation-enabled presentations.
+## 系统分层
 
-## Package Layout
-
-```text
-SKILL.md                         Agent-facing workflow contract (canonical)
-scripts/notrat-ppt.py          Stable command gateway
-src/notrat_ppt_studio/
-  core/                          Runtime configuration, state, template catalog
-  pipeline/                      Job preparation, lifecycle, assembly, reporting
-  media/                         Image generation, provider adapters, chroma tools
-  animation/                     OOXML grouping, animation transforms, validation
-prompts/workers/                 Worker role contracts
-templates/styles/<style-id>/     Reusable style template packs
-schemas/                         Machine-readable project contracts
-tests/                           Runtime and architecture checks
-docs/                            Detailed operating guidance
+```
+┌─────────────────────────────────────────┐
+│            SKILL.md (契约层)              │
+│   Agent 读到的唯一权威工作流文档            │
+├─────────────────────────────────────────┤
+│         scripts/notrat-ppt.py            │
+│   统一命令网关 (Python CLI)               │
+├──────────┬──────────┬───────────────────┤
+│  core/   │ pipeline/ │  animation/       │
+│  运行时   │  逐页管线  │  动画后处理         │
+│  状态管理  │  装配组装   │  OOXML 校验       │
+├──────────┴──────────┴───────────────────┤
+│              media/                      │
+│  图像生成 (provider 抽象层)                │
+├─────────────────────────────────────────┤
+│    @bapunhansdah/pptxgenjs (Node.js)     │
+│    原生可编辑对象 + animation 字段          │
+├─────────────────────────────────────────┤
+│    templates/styles/  +  schemas/        │
+│    样式模板 + JSON Schema 契约             │
+└─────────────────────────────────────────┘
 ```
 
-## Production Modes
+## 核心模块
 
-| Mode | What it produces | Object animation |
-|---|---|---|
-| **`editable` (DEFAULT)** | Native PowerPoint text, shapes, charts, tables, diagrams | **Required by default** via pptxgenjs fork + `animate` |
-| `hybrid` | Bitmap atmosphere/photography + native editable foreground | **Required on foreground objects** |
-| `image` | Full-slide 16:9 bitmaps assembled as slides | **None** (page transitions only) |
+### Python 运行时 (`src/notrat_ppt_studio/`)
 
-### Default path (hard rule)
+| 模块 | 文件 | 职责 |
+|------|------|------|
+| **core/runtime** | `core/runtime.py` | 环境检测、路径初始化、远程图像配置 |
+| **core/state** | `core/state.py` | 项目状态机（draft → building → review → delivered） |
+| **core/catalog** | `core/catalog.py` | 样式目录扫描与校验 |
+| **pipeline/prepare** | `pipeline/prepare.py` | 从大纲生成逐页渲染任务 |
+| **pipeline/assembler** | `pipeline/assembler.py` | 图片型 PPT 组装（`assemble` 命令） |
+| **pipeline/status** | `pipeline/status.py` | 逐页任务状态查询 |
+| **pipeline/record_*** | `pipeline/record_*.py` | 记录调度、结果、阻塞 |
+| **media/generator** | `media/generator.py` | 图像生成 provider 抽象与调用 |
+| **media/chroma** | `media/chroma.py` | 色彩处理与适配 |
+| **animation/postprocess** | `animation/postprocess.py` | OOXML 动画时间线注入 |
+| **animation/validate** | `animation/validate.py` | PPTX 结构与动画引用校验 |
 
-Unless the user explicitly asks for full-slide image posters or pure static layout:
+### JavaScript 运行时
 
-1. Choose **`editable`** (or `hybrid` if atmosphere background is needed).
-2. **Proactively design object animation** (3–7 meaningful steps per slide).
-3. Write `animation` on semantic objects with `@bapunhansdah/pptxgenjs@1.1.3`.
-4. Run `notrat-ppt.py animate` when groups or multi-effect sequences are used.
-5. Run `notrat-ppt.py validate` before delivery.
+| 文件 | 职责 |
+|------|------|
+| `src/layout.js` | 12 列网格系统 + 组合动画 API (`groupAnchor` / `groupMember` / `afterGroup`) |
+| `src/demo_build.js` | 8 页参考实现（editable + 全量对象动画） |
+| `src/notrat_ppt_studio/animation/capability_lab.js` | 动画能力实验台 |
 
-Do **not** default to the image + `assemble` pipeline. That path pastes one bitmap per slide and cannot host entrance/emphasis/exit/path object timelines.
+### Worker 提示
 
-## Project Contract
+| 文件 | 触发场景 |
+|------|---------|
+| `prompts/workers/render-editable-slide.md` | **默认**：editable / hybrid 逐页渲染 |
+| `prompts/workers/render-slide.md` | image 模式逐页图片生成 |
 
-A generated deck project uses stable responsibility-based paths:
+## 数据流
 
-```text
-<deck>/
-  deck.spec.json                 Approved deck specification
-  deck.manifest.json             Slide lifecycle and provenance
-  state/run.json                 Run-level status history
-  jobs/slides/slide_<NN>.json    Immutable worker jobs
-  assets/slides/slide_<NN>.png   Parent-owned final slide images (image/hybrid bg)
-  assets/sources/                User and approved source assets
-  work/candidates/               Worker-owned generated candidates
-  content/outline.md             Outline with mode + animation intent
-  content/speaker-notes.md       Speaker notes
-  output/                        PPTX, PDF, previews, and QA reports
-  output/*_raw.pptx              Pre-postprocess editable source
-  output/*_animation-report.json Structural animation checks
+### editable 路径（默认）
+
+```
+用户输入 → 大纲 (含 animation_intent)
+  → render-editable-slide.md worker 逐页生成
+  → @bapunhansdah/pptxgenjs 写入 animation 字段
+  → postprocess.py 注入 OOXML p:timing
+  → validate.py 校验
+  → 交付 .pptx
 ```
 
-The parent orchestrator owns the manifest, state, final assets, and delivery files. Workers read one job, write candidates, and return a strict result contract.
+### image 路径（仅用户明确要全页图片）
 
-For **editable** decks, the primary deliverable is native PPTX from the animation-capable backend — not `assets/slides/*.png` + `assemble`.
-
-## Command Surface
-
-All automation goes through:
-
-```text
-python scripts/notrat-ppt.py <command> [args]
+```
+用户输入 → 大纲
+  → prepare.py 生成逐页任务
+  → media/generator.py 生成 16:9 位图
+  → assembler.py 贴图组装
+  → 交付 .pptx (无对象动画)
 ```
 
-Commands: `runtime`, `styles`, `image`, `chroma`, `prepare`, `dispatch`, `result`, `blocker`, `status`, `assemble`, `animate`, `validate`, and `animation-lab`.
+### hybrid 路径
 
-Internal module paths are implementation details. New capabilities should enter through the gateway instead of adding another top-level script.
+```
+用户输入 → 大纲
+  → 前景: editable 路径 (layout.js + animation)
+  → 背景: image 路径 (media/generator.py)
+  → postprocess.py 合并
+  → validate.py 校验
+  → 交付 .pptx
+```
 
-| Command | Mode relevance |
-|---|---|
-| `image` / `prepare` / `dispatch` / `result` / `assemble` | Image-mode full-slide production (or hybrid backgrounds) |
-| `animate` / `validate` / `animation-lab` | **Editable/hybrid object animation** (default path) |
+## 命令网关路由
 
-## Animation Boundary
+`scripts/notrat-ppt.py` 是唯一入口，内部按命令名动态导入对应模块：
 
-Editable and hybrid animation decks use:
-
-`native PPTX (with animation fields) -> OOXML grouping/retargeting (animate) -> structural validation (validate) -> target-app playback QA`
-
-Critical distinctions:
-
-- Object animation lives in `p:timing` on shapes/text/groups.
-- Page transitions / Morph are **not** object animations.
-- `assemble` only pastes bitmaps; it never creates object timelines.
-- Structural validation cannot prove playback parity across PowerPoint, WPS, and LibreOffice.
-- Preserve the raw editable PPTX before postprocessing.
-
-Canonical agent rules are inlined in `SKILL.md` under **默认模式与自觉动画策略** and **动画硬约束**. `docs/object-animation-and-grouping.md` is the English backup detail.
+```
+runtime    → core/runtime.py
+styles     → core/catalog.py
+image      → media/generator.py
+chroma     → media/chroma.py
+prepare    → pipeline/prepare.py
+dispatch   → pipeline/record_dispatch.py
+result     → pipeline/record_result.py
+blocker    → pipeline/record_blocker.py
+status     → pipeline/status.py
+assemble   → pipeline/assembler.py
+animate    → animation/postprocess.py
+validate   → animation/validate.py
+animation-lab → node capability_lab.js
+```

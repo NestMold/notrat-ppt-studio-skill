@@ -4,7 +4,7 @@
 
 - Owner: [notrat.cn](https://notrat.cn)
 - Produced with: [notrat.cn](https://notrat.cn)
-- Version: 1.0.0
+- Version: 1.0.1
 - License: MIT. See `LICENSE` and `THIRD_PARTY_NOTICES.md` for third-party components.
 
 ## Description

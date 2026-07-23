@@ -1,7 +1,7 @@
 ---
 name: notrat-ppt-studio
 description: 使用 Notrat 创建、改编和检查专业 PowerPoint 演示文稿，支持图片型、原生可编辑型、混合可编辑型、对象组合、进入/强调/退出/路径动画及计时序列。默认 editable 并自觉编排对象动画，无需用户点名。
-version: 1.0.0
+version: 1.0.1
 license: MIT
 copyright: "Copyright © notrat.cn. All rights reserved."
 produced_with: "notrat.cn"
@@ -32,7 +32,7 @@ metadata:
 
 - **版权所有：** `notrat.cn`
 - **生产工具：** `notrat.cn`
-- **版本：** `1.0.0`
+- **版本：** `1.0.1`
 - **许可：** MIT License（开源）。可自由复制、分发、修改和使用，需保留版权声明。
 
 本 SKILL 是一套独立的 PowerPoint 生产规范。它负责把文章、报告、方案、数据、讲稿、品牌资料或既有 PPT 转换为结构清晰、视觉统一、可交付的演示文稿。
