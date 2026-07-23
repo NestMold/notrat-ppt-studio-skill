@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <img src="./assets/notrat.png" width="120" alt="Notrat PPT Studio">
+  <img src="./assets/nav-logo.png" width="120" alt="Notrat PPT Studio">
 </p>
 
 # Notrat PPT Studio
